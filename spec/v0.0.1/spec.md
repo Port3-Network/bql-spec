@@ -28,25 +28,23 @@ BQL language is written in YAML structure and uses predefined keywords to descri
 
 An example of a BQL script:
 
-```python
+```yaml
 %YAML 1.2
 ---
 topic: Stake ETH to Lido
 network: ethereum
 
 workflow:
-	- action: # stake ETH to lido, get stETH
-			name: step1
-			protocol: lido  # target protocol
-			contract: 0xFdDf38947aFB03C621C71b06C9C70bce73f12999 # target contract
-			call: deposit # target function
-			params:
-				deposit: 15000000000000
-				_depositsCount: 1
-				_stakingModuleId: "12345"
-				_depositCalldata: ""
-			return:  # return values
-				- {depositAmount}
+  - action: # stake ETH to lido, get stETH
+    name: step1
+    protocol: lido  # target protocol
+    contract: 0xFdDf38947aFB03C621C71b06C9C70bce73f12999 # target contract
+    call: deposit # target function
+    params:
+      deposit: 15000000000000
+      _depositsCount: 1
+    return:  # return values
+      - {depositAmount}
 ```
 
 ### Language Structure
@@ -71,22 +69,22 @@ network: ethereum # e.g. bnb_chain, polygon
 
 # Define a workflow that contains several actions below.
 workflow:
-	- action:
-			name: step1
-			...
+  - action:
+    name: step1
+    ...
 
 # Define an action
 action:
-	name: step1
-	sleep: 10 # sleep 10 seconds before run this action
-	protocol: lido  # Interactive Object Protocol
-	contract: 0xFdDf38947aFB03C621C71b06C9C70bce73f12999 # Interactive target contract address
-	call: deposit # Interaction Target Function
-	params:
-		- deposit: 15000000000000
-		- _depositsCount: 1
-	return:  # Receiving array as return value
-		- {depositAmount} # The return value is stored in the variable depositAmount.
+  name: step1
+  sleep: 10 # sleep 10 seconds before run this action
+  protocol: lido  # Interactive Object Protocol
+  contract: 0xFdDf38947aFB03C621C71b06C9C70bce73f12999 # Interactive target contract address
+  call: deposit # Interaction Target Function
+  params:
+    - deposit: 15000000000000
+    - _depositsCount: 1
+  return:  # Receiving array as return value
+    - {depositAmount} # The return value is stored in the variable depositAmount.
 
 # Specify which protocol to use
 protocol: uniswap
@@ -102,8 +100,8 @@ sleep: 10 # sleep for 10 seconds
 
 # Define a list to receive return values
 return:
-	- {amount}
-	- {address}
+  - {amount}
+  - {address}
 
 # Runtime wallet address
 $ADDRESS
@@ -150,8 +148,8 @@ If a value cannot be determined at the time of definition, a placeholder can be 
 
 ```yaml
 return:
-	- {amount}    # Receive the first return value and assign it to the variable 'amount'.
-	- {address}    # Receive the second return value and assign it to the 'address' variable.
+  - {amount}    # Receive the first return value and assign it to the variable 'amount'.
+  - {address}    # Receive the second return value and assign it to the 'address' variable.
 ```
 
 Received variables can be referenced in later steps using the $ symbol, just like regular variables.
@@ -163,23 +161,23 @@ The BQL executor identifies various expressions through regular expression match
 ```yaml
 # Plus
 params:
-	price: $predictPrice + 0.01
+  price: $predictPrice + 0.01
 
 # Subtraction
 params:
-	price: $predictPrice - 0.01
+  price: $predictPrice - 0.01
 
 # Multiplication
 params:
-	price: $predictPrice * 0.01
+  price: $predictPrice * 0.01
 
 # Division
 params:
-	price: $predictPrice / 10
+  price: $predictPrice / 10
 
 # Operations can be freely combined
 params:
-	price: 60 * 20 / 10 + 5 # result 125
+  price: 60 * 20 / 10 + 5 # result 125
 ```
 
 Calculations with variables: first replace the variable values in the references, then perform addition, subtraction, multiplication, or division.
@@ -282,21 +280,21 @@ The current design of BQL only covers on-chain operations. BQL can also be easil
 
 For example, BQL can be used to describe a user's Twitter Like behavior:
 
-```python
+```yaml
 %YAML 1.2
 ---
 topic: Like Port3 Network tweet
 
 workflow:
-	- action: # Like tweet
-			name: step1
-			platform: twitter
-			method: like
-			params:
-				account: $TWITTER_HANDLE # user's twitter account
-				tweet_id: 1676859443403956224
-			return:
-				- {retweet_id}
+  - action: # Like tweet
+    name: step1
+    platform: twitter
+    method: like
+    params:
+      account: $TWITTER_HANDLE # user's twitter account
+      tweet_id: 1676859443403956224
+    return:
+      - {retweet_id}
 ```
 
 For the implementation phase, the application layer must support platform functionality, such as allowing users to "like" on Twitter. We also need to record information about different platforms and actions, as each platform may have its own definitions.
