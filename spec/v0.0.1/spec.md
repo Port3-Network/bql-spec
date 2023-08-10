@@ -235,42 +235,42 @@ An Example of SBT Metadata:
 
 ```python
 {
-  "name": "SoQuest Skywalker Pass",
-  "symbol": "SoQuest Skywalker Pass",
-  "description": "Those who completed a series of moves on the chain were awarded the Skywalker Badge.",
-  "issuer": "Port3 Network",
-  "image": "https://sograph-static.s3-accelerate.amazonaws.com/dashboard/images/04966BF262CC260B927028AB530EB46E.jpg",
-  "attributes": [
+    "name": "SoQuest Skywalker Pass",
+    "symbol": "SoQuest Skywalker Pass",
+    "description": "Those who completed a series of moves on the chain were awarded the Skywalker Badge.",
+    "issuer": "Port3 Network",
+    "image": "https://sograph-static.s3-accelerate.amazonaws.com/dashboard/images/04966BF262CC260B927028AB530EB46E.jpg",
+    "attributes": [
     {
-      "trait_type": "Background",
-      "value": "Brown Planets"
+        "trait_type": "Background",
+        "value": "Brown Planets"
     }
-  ],
-  // BQL that relate with this SBT
-  "BQL": [{
-  	"topic": "Mint Port3 Avatar",
-  	"network": "bnb_chain",
-  	"workflow": [ // action details
-  		{
-  			"action": {
-  				"name": "mint_avatar",
-  				"protocol": "Port3Avatar",
-  				"call": "mint",
-  				"params": {
-  					"_mintAmount": 1,
-  					"_to": "0x02472BE0E9ef11Da8C5936081f4239B362dC4fA0",
-  					"_sinature": "0x82df3e68f8e98ae8aa5bf2c1991289a0fe1e1a23f44e71e1bf2260140da40e656bf5e20b0868790af1598e8ba959dc660c8d759854ed4b737af37350ade5d9581c",
-  				}
-  			},
-  			// more actions
-  			...
-  		}
-  	]
-  }, {
-  // more workflows
-  ...
-  }]
-  "version": 1
+    ],
+    // BQL that relate with this SBT
+    "BQL": [{
+        "topic": "Mint Port3 Avatar",
+        "network": "bnb_chain",
+        "workflow": [ // action details
+        {
+            "action": {
+                "name": "mint_avatar",
+                "protocol": "Port3Avatar",
+                "call": "mint",
+                "params": {
+                    "_mintAmount": 1,
+                    "_to": "0x02472BE0E9ef11Da8C5936081f4239B362dC4fA0",
+                    "_sinature": "0x82df3e68f8e98ae8aa5bf2c1991289a0fe1e1a23f44e71e1bf2260140da40e656bf5e20b0868790af1598e8ba959dc660c8d759854ed4b737af37350ade5d9581c",
+                }
+            },
+            // more actions
+            ...
+        }
+        ]
+    }, {
+        // more workflows
+        ...
+    }]
+    "version": 1
 }
 ```
 
@@ -287,14 +287,14 @@ topic: Like Port3 Network tweet
 
 workflow:
   - action: # Like tweet
-    name: step1
-    platform: twitter
-    method: like
-    params:
-      account: $TWITTER_HANDLE # user's twitter account
-      tweet_id: 1676859443403956224
-    return:
-      - {retweet_id}
+      name: step1
+      platform: twitter
+      method: like
+      params:
+        account: $TWITTER_HANDLE # user's twitter account
+        tweet_id: 1676859443403956224
+      return:
+        - {retweet_id}
 ```
 
 For the implementation phase, the application layer must support platform functionality, such as allowing users to "like" on Twitter. We also need to record information about different platforms and actions, as each platform may have its own definitions.
