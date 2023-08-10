@@ -36,15 +36,15 @@ network: ethereum
 
 workflow:
   - action: # stake ETH to lido, get stETH
-    name: step1
-    protocol: lido  # target protocol
-    contract: 0xFdDf38947aFB03C621C71b06C9C70bce73f12999 # target contract
-    call: deposit # target function
-    params:
-      deposit: 15000000000000
-      _depositsCount: 1
-    return:  # return values
-      - {depositAmount}
+      name: step1
+      protocol: lido  # target protocol
+      contract: 0xFdDf38947aFB03C621C71b06C9C70bce73f12999 # target contract
+      call: deposit # target function
+      params:
+        deposit: 15000000000000
+        _depositsCount: 1
+      return:  # return values
+        - {depositAmount}
 ```
 
 ### Language Structure
@@ -70,8 +70,8 @@ network: ethereum # e.g. bnb_chain, polygon
 # Define a workflow that contains several actions below.
 workflow:
   - action:
-    name: step1
-    ...
+      name: step1
+      ...
 
 # Define an action
 action:
@@ -247,36 +247,36 @@ An Example of SBT Metadata:
     }
   ],
   // BQL that relate with this SBT
-	"BQL": [{
-		"topic": "Mint Port3 Avatar",
-		"network": "bnb_chain",
-		"workflow": [ // action details
-			{
-				"action": {
-					"name": "mint_avatar",
-					"protocol": "Port3Avatar",
-					"call": "mint",
-					"params": {
-						"_mintAmount": 1,
-						"_to": "0x02472BE0E9ef11Da8C5936081f4239B362dC4fA0",
-						"_sinature": "0x82df3e68f8e98ae8aa5bf2c1991289a0fe1e1a23f44e71e1bf2260140da40e656bf5e20b0868790af1598e8ba959dc660c8d759854ed4b737af37350ade5d9581c",
-					}
-				},
-				// more actions
-				...
-			}
-		]
-	}, {
-	// more workflows
-	...
-	}]
+  "BQL": [{
+  	"topic": "Mint Port3 Avatar",
+  	"network": "bnb_chain",
+  	"workflow": [ // action details
+  		{
+  			"action": {
+  				"name": "mint_avatar",
+  				"protocol": "Port3Avatar",
+  				"call": "mint",
+  				"params": {
+  					"_mintAmount": 1,
+  					"_to": "0x02472BE0E9ef11Da8C5936081f4239B362dC4fA0",
+  					"_sinature": "0x82df3e68f8e98ae8aa5bf2c1991289a0fe1e1a23f44e71e1bf2260140da40e656bf5e20b0868790af1598e8ba959dc660c8d759854ed4b737af37350ade5d9581c",
+  				}
+  			},
+  			// more actions
+  			...
+  		}
+  	]
+  }, {
+  // more workflows
+  ...
+  }]
   "version": 1
 }
 ```
 
 ## Scalability
 
-The current design of BQL only covers on-chain operations. BQL can also be easily extended to describe Web2 scenarios by add more keywords.
+The current design of BQL only covers on-chain operations. BQL can also be easily extended to intent centric and describe Web2 scenarios by add more keywords.
 
 For example, BQL can be used to describe a user's Twitter Like behavior:
 
